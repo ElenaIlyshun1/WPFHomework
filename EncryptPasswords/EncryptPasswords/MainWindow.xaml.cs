@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
@@ -52,6 +53,48 @@ namespace EncryptPasswords
             {
                 sw.WriteLine(txtEmail.Text + "-"+ encryptPasswd);
             }
+        }
+
+        private void BtnSaveBySQL_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string dbName = "encryptPassword.sqlite";
+                SQLiteConnection con = new SQLiteConnection($"Data Source={dbName}");
+                con.Open();
+                string password = HashPassword(txtPasswd.Text);
+
+                MessageBox.Show(password);
+                string query = $"INSERT INTO MYSTUDENTS(NAME,PASSWORD) values ({txtName.Text},{password});";
+                SQLiteCommand cmd = new SQLiteCommand(query, con);
+                cmd.ExecuteNonQuery();
+                con.Close();
+              
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+                // throw;
+            }
+
+        }
+        public static string HashPassword(string password)
+        {
+            byte[] salt;
+            byte[] buffer2;
+            if (password == null)
+            {
+                throw new ArgumentNullException("password");
+            }
+            using (Rfc2898DeriveBytes bytes = new Rfc2898DeriveBytes(password, 0x10, 0x3e8))
+            {
+                salt = bytes.Salt;
+                buffer2 = bytes.GetBytes(0x20);
+            }
+            byte[] dst = new byte[0x31];
+            Buffer.BlockCopy(salt, 0, dst, 1, 0x10);
+            Buffer.BlockCopy(buffer2, 0, dst, 0x11, 0x20);
+            return Convert.ToBase64String(dst);
         }
     }
 }
