@@ -13,7 +13,8 @@
         <TextBox x:Name="txtEmail" HorizontalAlignment="Left" Height="23" Margin="213,42,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="299"/>
         <TextBox x:Name="txtPasswd" HorizontalAlignment="Left" Height="23" Margin="213,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="299"/>
         <TextBox x:Name="txtLastPasswd" HorizontalAlignment="Left" Height="23" Margin="213,135,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="299"/>
-        <Button x:Name="btnSave" Content="Зберегти" HorizontalAlignment="Left" Margin="57,173,0,-12" VerticalAlignment="Top" Width="455" Height="33" Click="BtnSave_Click"/>
+        <Button x:Name="btnSave" Content="Зберегти" HorizontalAlignment="Left" Margin="57,173,0,-12" VerticalAlignment="Top" Width="189" Height="33" Click="BtnSave_Click"/>
+        <Button x:Name="btnSaveByFile" Content="Зберегти пароль у файл " HorizontalAlignment="Left" Margin="290,173,0,-12" Width="191" Click="BtnSaveByFile_Click"/>
 
     </Grid>
 </Window>

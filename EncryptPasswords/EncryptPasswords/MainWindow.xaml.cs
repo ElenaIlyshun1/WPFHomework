@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -42,6 +43,15 @@ namespace EncryptPasswords
                 str.Append(result[i].ToString("x2"));
             }
             return str.ToString();
+        }
+
+        private void BtnSaveByFile_Click(object sender, RoutedEventArgs e)
+        {
+            string encryptPasswd = GetMD5(txtPasswd.Text);
+            using (StreamWriter sw = new StreamWriter(@"D:\ШАГГГГГ\WPF\EncryptPasswords\EncryptPasswords\passwd.txt", true, System.Text.Encoding.Default))
+            {
+                sw.WriteLine(txtEmail.Text + "-"+ encryptPasswd);
+            }
         }
     }
 }
