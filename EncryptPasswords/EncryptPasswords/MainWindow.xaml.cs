@@ -65,7 +65,9 @@ namespace EncryptPasswords
                 string password = HashPassword(txtPasswd.Text);
 
                 MessageBox.Show(password);
-                string query = $"INSERT INTO MYSTUDENTS(NAME,PASSWORD) values ({txtName.Text},{password});";
+
+                string query = $"INSERT INTO MYSTUDENTS(NAME,PASSWORD)VALUES('{txtName.Text}','{password}')";
+                //TODO: Insert by SQLite
                 SQLiteCommand cmd = new SQLiteCommand(query, con);
                 cmd.ExecuteNonQuery();
                 con.Close();
